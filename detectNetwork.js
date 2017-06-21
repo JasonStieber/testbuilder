@@ -7,23 +7,22 @@
 //   1. The first few numbers (called the prefix)
 //   2. The number of digits in the number (called the length)
 
-var searchInArr = function(itemToMatch, arrToSearch){
-    for(var i = 0; i < arrToSearch.length; i++){
-      if(itemToMatch === arrToSearch[i]){
-        return true;
-      }
-    }return false;
-};
-
+var searchChgInputs = function(longerItemToMatch,arrToSearch){
+  for(var i = 0; i < arrToSearch.length; i++){
+    if(longerItemToMatch.slice(0,arrToSearch[i].length) === arrToSearch[i]){
+      return true;
+    }
+  }return false;
+}
 var creditCards = [
-        {name: "Diner's Club",    prefix: ['38','39'],               cLength: [14]},
-        {name: "American Express",prefix: ['34','37'],               cLength: [15]},
-        {name: "Visa",            prefix: ['4'],                     cLength: [13,16,19]},
-        {name: "MasterCard",      prefix: ['51','52','53','54','55'],cLength: [16]}
-        //,{name: "Discover",        prefix: [],                        length: []}
+    {name: "Diner's Club",    prefix: ['38','39'],                  cLength: [14]},
+    {name: "American Express",prefix: ['34','37'],                  cLength: [15]},
+    {name: "Visa",            prefix: ['4'],                        cLength: [13,16,19]},
+    {name: "MasterCard",      prefix: ['51','52','53','54','55'],   cLength: [16]},
+    {name: "Discover",        prefix: ['6011','644','645','646',
+                                       '657','658','659','65'],     cLength: [16,19]},
+    {name: "Maestro",         prefix: ['5018','5020','5038','6304'],cLength:[12,13,14,15,16,17,18,19]}
       ];
-
-
 var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
@@ -32,8 +31,8 @@ var detectNetwork = function(cardNumber) {
   for(var i = 0; i < creditCards.length; i++){
     var prefixArr = creditCards[i].prefix;
     var cardLengthArr = creditCards[i].cLength;
-    var firstNums = cardNumber.slice(0,(prefixArr[0].length));
-    if(searchInArr(firstNums,prefixArr) && searchInArr(crdLen,cardLengthArr)){
+    var firstNums = cardNumber.slice(0,(prefixArr[0].length+2));
+    if( searchChgInputs(firstNums, prefixArr) && cardLengthArr.includes(crdLen)){
         return creditCards[i].name;
     }
   }return "Unknown Card";
