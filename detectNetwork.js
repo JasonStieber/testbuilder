@@ -20,7 +20,7 @@ var creditCards = [
     {name: "Visa",            prefix: ['4'],                        cLength: [13,16,19]},
     {name: "MasterCard",      prefix: ['51','52','53','54','55'],   cLength: [16]},
     {name: "Discover",        prefix: ['6011','644','645','646',
-                                       '657','658','659','65'],     cLength: [16,19]},
+                                       '647','648','649','65'],     cLength: [16,19]},
     {name: "Maestro",         prefix: ['5018','5020','5038','6304'],cLength:[12,13,14,15,16,17,18,19]}
       ];
 var detectNetwork = function(cardNumber) {

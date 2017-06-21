@@ -141,7 +141,7 @@ describe('MasterCard', function() {
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  var prefixes = ['6011','644','645','646','657','658','659','65'];
+  var prefixes = ['6011','644','645','646','647','648','649','65'];
   for(var prefix = 644; prefix <= 649; prefix++){
     it('has a prefix of ' + prefix + ' and a length of 16',function(){
       var ccNum = prefix.toString() + '1234567891011';
