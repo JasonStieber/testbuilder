@@ -17,12 +17,25 @@ var searchChgInputs = function(longerItemToMatch,arrToSearch){
 var creditCards = [
     {name: "Diner's Club",    prefix: ['38','39'],                  cLength: [14]},
     {name: "American Express",prefix: ['34','37'],                  cLength: [15]},
+    {name: "Switch",          prefix: ['4903','4905','4911','4936','564182',
+                                       '633110','6333','6759'],     cLength: [16,18,19]},
     {name: "Visa",            prefix: ['4'],                        cLength: [13,16,19]},
     {name: "MasterCard",      prefix: ['51','52','53','54','55'],   cLength: [16]},
     {name: "Discover",        prefix: ['6011','644','645','646',
                                        '647','648','649','65'],     cLength: [16,19]},
-    {name: "Maestro",         prefix: ['5018','5020','5038','6304'],cLength:[12,13,14,15,16,17,18,19]}
+    {name: "Maestro",         prefix: ['5018','5020','5038','6304'],cLength: [12,13,14,15,16,17,18,19]},
+    {name: "China UnionPay",  prefix: ['624','625','626','6282','6283','6288',
+                                       '6284','6285','6286','6287'],cLength: [16,17,18,19]}
+
       ];
+for(var i = 622126; i <= 622925; i++){
+  creditCards[7].prefix.push(i.toString());
+}
+
+creditCards[6].prefix.push()
+// China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
+// Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 and a length of 16, 18, or 19.
+
 var detectNetwork = function(cardNumber) {
   // Note: `cardNumber` will always be a string
   // The Diner's Club network always starts with a 38 or 39 and is 14 digits long
@@ -31,7 +44,7 @@ var detectNetwork = function(cardNumber) {
   for(var i = 0; i < creditCards.length; i++){
     var prefixArr = creditCards[i].prefix;
     var cardLengthArr = creditCards[i].cLength;
-    var firstNums = cardNumber.slice(0,(prefixArr[0].length+2));
+    var firstNums = cardNumber.slice(0,(prefixArr[0].length+3));
     if( searchChgInputs(firstNums, prefixArr) && cardLengthArr.includes(crdLen)){
         return creditCards[i].name;
     }
